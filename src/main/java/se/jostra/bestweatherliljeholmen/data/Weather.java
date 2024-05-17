@@ -3,7 +3,7 @@ package se.jostra.bestweatherliljeholmen.data;
 import java.time.LocalDateTime;
 
 public class Weather {
-    private LocalDateTime timeSeries;
+    private LocalDateTime localDateTime;
     private double celsius;
     private double airPressureAtSeaLevel;
     private int cloudChance;
@@ -16,7 +16,7 @@ public class Weather {
     public Weather(LocalDateTime localDateTime, double celsius, double airPressureAtSeaLevel,
                    int cloudChance, int relativeHumidity, double rainAmount,
                    int windFromDirection, double windSpeed, String weatherSource) {
-        this.timeSeries = localDateTime;
+        this.localDateTime = localDateTime;
         this.celsius = celsius;
         this.airPressureAtSeaLevel = airPressureAtSeaLevel;
         this.cloudChance = cloudChance;
@@ -35,12 +35,12 @@ public class Weather {
         this.celsius = celsius;
     }
 
-    public LocalDateTime getTimeSeries() {
-        return timeSeries;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setTimeSeries(LocalDateTime timeSeries) {
-        this.timeSeries = timeSeries;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public double getAirPressureAtSeaLevel() {
@@ -102,7 +102,7 @@ public class Weather {
     @Override
     public String toString() {
         return "Weather{" +
-                "localDateTime=" + timeSeries +
+                "localDateTime=" + localDateTime +
                 ", celsius=" + celsius +
                 ", airPressureAtSeaLevel=" + airPressureAtSeaLevel +
                 ", cloudChance=" + cloudChance +

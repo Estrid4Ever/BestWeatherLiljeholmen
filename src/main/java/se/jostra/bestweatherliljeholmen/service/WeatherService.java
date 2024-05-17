@@ -22,8 +22,8 @@ public class WeatherService {
                 .thenComparingDouble(Weather::getCloudChance).reversed()
         );
 
-        for (int i = 0; i < allWeather.size(); i++) {
-            System.out.println(allWeather.get(i));
+        for (Weather weather : allWeather) {
+            System.out.println(weather);
         }
 
         return allWeather.getLast();

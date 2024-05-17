@@ -16,7 +16,7 @@ public class WeatherController {
     public String getBestWeather(Model model) {
         Weather weather = weatherService.getBestWeather();
 
-        model.addAttribute("timestamp", weather.getTimeSeries());
+        model.addAttribute("timestamp", weather.getLocalDateTime());
         model.addAttribute("celsius", weather.getCelsius());
         model.addAttribute("windspeed", weather.getWindSpeed());
         model.addAttribute("winddirection",
