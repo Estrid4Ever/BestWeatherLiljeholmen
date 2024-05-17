@@ -32,45 +32,33 @@ public class WeatherDAO {
 
         smhiMono
                 .timeout(Duration.ofSeconds(2))
+                .doFinally(signal -> smhiIsDone.set(true))
                 .subscribe(
-                smhi -> {
-                    weathers.add(smhiToWeather(smhi));
-                },
-                error -> {
-                    System.out.println("Smhi error");
-                },
-                () -> {
-                    smhiIsDone.set(true);
-                }
+                smhi -> weathers.add(smhiToWeather(smhi)),
+                error -> System.out.println("Smhi error")
         );
         metMono
                 .timeout(Duration.ofSeconds(2))
+                .doFinally(signal -> metIsDone.set(true))
                 .subscribe(
-                met -> {
-                    weathers.add(metToWeather(met));
-                },
-                error -> {
-                    System.out.println("Met error");
-                },
-                () -> {
-                    metIsDone.set(true);
-                }
+                met -> weathers.add(metToWeather(met)),
+                error -> System.out.println("Met error")
         );
         meteoMono
                 .timeout(Duration.ofSeconds(2))
+                .doFinally(signal -> meteoIsDone.set(true))
                 .subscribe(
-                meteo -> {
-                    weathers.add(meteoToWeather(meteo));
-                },
-                error -> {
-                    System.out.println("Meteo error");
-                },
-                () -> {
-                    meteoIsDone.set(true);
-                }
+                meteo -> weathers.add(meteoToWeather(meteo)),
+                error -> System.out.println("Meteo error")
         );
 
         awaitAllApiCalls(metIsDone, smhiIsDone, meteoIsDone);
+
+        if (weathers.isEmpty()) {
+            weathers.add(new Weather(LocalDateTime.now(), 0, 0,
+                    0, 0, 0, 0,
+                    0,"No service avalible, try again."));
+        }
 
         return weathers;
     }
@@ -168,12 +156,12 @@ public class WeatherDAO {
 
 
             if (timeSeries.equals(roundedToClosestPlus24Hour)) {
-                TreeMap<LocalDateTime, Integer> timeMap = new TreeMap<LocalDateTime, Integer>();
+                TreeMap<LocalDateTime, Integer> timeMap = new TreeMap<>();
                 timeMap.put(timeSeries, i);
                 return timeMap;
             }
         }
-        TreeMap<LocalDateTime, Integer> timeMap = new TreeMap<LocalDateTime, Integer>();
+        TreeMap<LocalDateTime, Integer> timeMap = new TreeMap<>();
         timeMap.put(LocalDateTime.now(), 0);
         return timeMap;
     }

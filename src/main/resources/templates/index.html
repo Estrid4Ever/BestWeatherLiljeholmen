@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Det bästa vädret i Liljeholmen imorgon är:</h1>
-<p id="time" th:text="'Tid: ' + ${timestamp}"></p>
-<p id="celsius" th:text="'Temperatur: ' + ${celsius} + 'ºc'"></p>
+<h1>Det bästa vädret i Liljeholmen om 24 timmar är:</h1>
+<p id="time" th:text="'Tid för prognos: ' + ${timestamp}"></p>
+<p id="celsius" th:text="'Temperatur: ' + ${celsius} + 'ºC'"></p>
 <p id="wind" th:text="'Vind: ' + ${windspeed} + ' m/s från ' + ${winddirection}"></p>
 <p id="rain" th:text="'Regn: ' + ${rain} + ' mm/h'"></p>
 <p id="cloudchance" th:text="'Molnighet: ' + ${cloudchance} + '%'"></p>
